@@ -1,16 +1,16 @@
-/*import { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { ApiResponse } from "../../../infrastructure/interfaces/api.response";
-import { OneCountryResponse } from "../../../infrastructure/interfaces/one-country.response";
 import { ApiErrorResponse } from "../../../infrastructure/interfaces/api-error.response";
 import { personsApi } from "../../api/persons.api";
+import { OneRoleResponse } from "../../../infrastructure/interfaces/one-role.response";
 
-export const getOneCountryAction = async (countryId: string): 
-Promise<ApiResponse<OneCountryResponse>> => {
+export const getOneRoleAction = async (roleId: string): 
+Promise<ApiResponse<OneRoleResponse>> => {
 
     try {
 
         const { data } = await personsApi
-        .get<ApiResponse<OneCountryResponse>>(`/countries/${countryId}`);
+        .get<ApiResponse<OneRoleResponse>>(`/roles/${roleId}`);
 
         return data
         
@@ -28,4 +28,4 @@ Promise<ApiResponse<OneCountryResponse>> => {
                 }
     }
 
-}*/
+}

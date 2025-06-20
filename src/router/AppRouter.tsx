@@ -6,7 +6,10 @@ import { PersonsPage } from "../presentation/pages/persons/PersonsPage"
 import { CreateCountryPage } from "../presentation/pages/countries/CreateCountryPage"
 import { EditCountryPage } from "../presentation/pages/countries/EditCountryPage"
 import { DeleteCountryPage } from "../presentation/pages/countries/DeleteCountryPage"
-//import { RolesPage } from "../presentation/pages/Roles/RolesPage"
+import { RolesPage } from "../presentation/pages/Roles/RolesPage"
+import { CreateRolePage } from "../presentation/pages/Roles/CreateRolePage"
+import { EditRolePage } from "../presentation/pages/Roles/EditRolePage"
+import { DeleteRolePage } from "../presentation/pages/Roles/DeleteRolePage"
 
 
 export const AppRouter = () => {
@@ -22,7 +25,12 @@ export const AppRouter = () => {
           <Route path="/countries/:countryId/edit" element={<EditCountryPage/>} />
           <Route path="/countries/:countryId/delete" element={<DeleteCountryPage/>} />
           <Route path="/persons" element={<PersonsPage/>} />
-          {/*<Route path="/roles" element={<RolesPage/>} />*/}
+          <Route path="/roles" element={<RolesPage/>} />
+          <Route path="/roles/create" element={<CreateRolePage/>} />
+          <Route path="/roles/:roleId/edit" element={<EditRolePage/>} />
+          <Route path="/roles/:roleId/delete" element={<DeleteRolePage/>} />
+
+
 
           </Route>
           

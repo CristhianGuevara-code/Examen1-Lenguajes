@@ -1,20 +1,20 @@
-/*import { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { ApiResponse } from "../../../infrastructure/interfaces/api.response";
-import { CountryResponse } from "../../../infrastructure/interfaces/country.response";
-import { CountryModel } from "../../models/country.model";
 import { ApiErrorResponse } from "../../../infrastructure/interfaces/api-error.response";
 import { personsApi } from "../../api/persons.api";
+import { RoleModel } from "../../models/role.model";
+import { RoleResponse } from "../../../infrastructure/interfaces/role.response";
 
-export const editCountryAction = async (
-    country: CountryModel, countryId: string
-): Promise<ApiResponse<CountryResponse>> => {
+export const editRoleAction = async (
+    role: RoleModel, roleId: string
+): Promise<ApiResponse<RoleResponse>> => {
 
     try {
 
         const { data } = await personsApi
-            .put<ApiResponse<CountryResponse>>(
-                `/countries/${countryId}`,
-                country
+            .put<ApiResponse<RoleResponse>>(
+                `/roles/${roleId}`,
+                role
             );
 
         return data;
@@ -31,4 +31,4 @@ export const editCountryAction = async (
         }
     }
 
-}*/
+}

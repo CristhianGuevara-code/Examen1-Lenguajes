@@ -1,4 +1,4 @@
-import { Globe, Users } from "lucide-react"
+import { Globe, Layers2, UserCog, Users } from "lucide-react"
 import { Title } from "../../componentes/shared/Title"
 import { Dashboard } from "../../componentes/home/Dashboard"
 import { Loader } from "../../componentes/shared/Loader"
@@ -33,7 +33,13 @@ export const HomePage = () => {
        countValue={data?.data?.personsCount || 0}
        icon={<Users size={48}/>}
         />
-        
+      
+      <Dashboard
+       title="Roles"
+       to="/roles/create"
+       countValue={data?.data?.rolesCount || 0}
+       icon={<Layers2 size={48}/>}
+        />
          
 
       </div>

@@ -5,7 +5,7 @@ import { personsApi } from "../../api/persons.api";
 import { RolesResponse } from "../../../infrastructure/interfaces/roles.response";
 import { RoleModel } from "../../models/role.model";
 
-export const createCountryAction = async (
+export const createRoleAction = async (
     role: RoleModel
 ): Promise<ApiResponse<RolesResponse>> => {
 

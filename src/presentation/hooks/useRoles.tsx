@@ -1,15 +1,14 @@
-/*
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useCallback, useState } from "react"
-import { getPaginationCountriesAction } from "../../core/actions/countries/get-pagination-countries.action";
-import { CountryModel } from "../../core/models/country.model";
-import { createCountryAction } from "../../core/actions/countries/create-country.action";
 import { useNavigate } from "react-router";
-import { getOneCountryAction } from "../../core/actions/countries/get-one-country.action";
-import { editCountryAction } from "../../core/actions/countries/edit-country.action";
-import { deleteCountryAction } from "../../core/actions/countries/delete-country.action";
+import { getPaginationRolesAction } from "../../core/actions/roles/get-pagination-roles-action";
+import { getOneRoleAction } from "../../core/actions/roles/get-one-role.action";
+import { RoleModel } from "../../core/models/role.model";
+import { createRoleAction } from "../../core/actions/roles/create-role.action";
+import { editRoleAction } from "../../core/actions/roles/edit-role.action";
+import { deleteRoleAction } from "../../core/actions/roles/delete-role.action";
 
-export const useCountries = (countryId?: string) => {
+export const useRoles = (roleId?: string) => {
   
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -17,26 +16,26 @@ export const useCountries = (countryId?: string) => {
 
   const navigate = useNavigate();
   
-  const countriesPaginationQuery = useQuery({
-    queryKey: ["countries", page, pageSize, searchTerm], // Unique key 
-    queryFn: () => getPaginationCountriesAction(page, pageSize, searchTerm),
+  const rolesPaginationQuery = useQuery({
+    queryKey: ["roles", page, pageSize, searchTerm], // Unique key 
+    queryFn: () => getPaginationRolesAction(page, pageSize, searchTerm),
     staleTime: 1000 * 60 * 5, // 5M
     refetchOnWindowFocus: false,
   });
 
-  const oneCountryQuery = useQuery({
-    queryKey: ["country", countryId],
-    queryFn: () => getOneCountryAction(countryId!),
-    enabled: !!countryId,
+  const oneRoleQuery = useQuery({
+    queryKey: ["role", roleId],
+    queryFn: () => getOneRoleAction(roleId!),
+    enabled: !!roleId,
     staleTime: 0,
     refetchOnWindowFocus: false,
   });
 
-  const createCountryMutation = useMutation({
-    mutationFn: (country: CountryModel) => createCountryAction(country),
+  const createRoleMutation = useMutation({
+    mutationFn: (role: RoleModel) => createRoleAction(role),
     onSuccess: (data) => {
       if(data.status) {
-        navigate("/countries");
+        navigate("/roles");
       }
     },
     onError: (data) => {
@@ -44,12 +43,12 @@ export const useCountries = (countryId?: string) => {
     }
   });
 
-  const editCountryMutation = useMutation({
-    mutationFn: (country: CountryModel) => editCountryAction(country, countryId!),
+  const editRoleMutation = useMutation({
+    mutationFn: (role: RoleModel) => editRoleAction(role, roleId!),
     onSuccess: (data) => {
       if(data.status) {
-        refreshCountries();
-        navigate("/countries");
+        refreshRoles();
+        navigate("/roles");
       }
     },
     onError: (data) => {
@@ -57,12 +56,12 @@ export const useCountries = (countryId?: string) => {
     },
   });
 
-    const deleteCountryMutation = useMutation({
-    mutationFn: () => deleteCountryAction(countryId!),
+    const deleteRoleMutation = useMutation({
+    mutationFn: () => deleteRoleAction(roleId!),
     onSuccess: (data) => {
       if(data.status) {
-        refreshCountries();
-        navigate("/countries");
+        refreshRoles();
+        navigate("/roles");
       }
     },
     onError: (data) => {
@@ -70,9 +69,9 @@ export const useCountries = (countryId?: string) => {
     },
   });
 
-  const refetch = countriesPaginationQuery.refetch;
+  const refetch = rolesPaginationQuery.refetch;
 
-  const refreshCountries = useCallback(() => {
+  const refreshRoles = useCallback(() => {
     refetch();
   }, [refetch]);
 
@@ -81,17 +80,16 @@ export const useCountries = (countryId?: string) => {
     page,
     pageSize,
     searchTerm,
-    countriesPaginationQuery,
-    oneCountryQuery,
-    createCountryMutation,
-    editCountryMutation,
-    deleteCountryMutation,
+    rolesPaginationQuery,
+    oneRoleQuery,
+    createRoleMutation,
+    editRoleMutation,
+    deleteRoleMutation,
 
     // Methods
     setPage,
     setPageSize,
     setSearchTerm,
-    refreshCountries,
+    refreshRoles,
   }
 }
-*/

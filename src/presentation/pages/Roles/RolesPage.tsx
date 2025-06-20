@@ -1,63 +1,64 @@
-/*import { ArrowBigLeft, ArrowBigRight, Edit, Plus, Search, Trash } from "lucide-react"
+import { ArrowBigLeft, ArrowBigRight, Edit, Plus, Search, Trash } from "lucide-react"
 import React, { useState } from "react";
 import { Link } from "react-router";
 import { Title } from "../../componentes/shared/Title";
 import { useRoles } from "../../hooks/useRoles";
 
-export const RolesPage = () =>{
-const [searchField, setSearchField] = useState("");
+export const RolesPage = () => {
 
-const { rolesPaginationQuery,
+  const [searchField, setSearchField] = useState("");
+
+  const { rolesPaginationQuery,
     searchTerm,
     setSearchTerm,
     setPage,
     page,
     pageSize,
     setPageSize,
-    refreshCountries } = useRoles();
+    refreshRoles} = useRoles();
 
-    const pageSizeOptions = [5, 10, 20];
-    
-      // console.log(countriesPaginationQuery.data);
-    
-      const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchField(e.target.value)
-      }
-    
-      const handleClickSearch = () => {
-        setPage(1);
-        setSearchTerm(searchField);
-        //refreshCountries();
-      }
-    
-      const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-          handleClickSearch();
-        }
-      }
-    
-      const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setPageSize(Number(e.target.value));
-        setPage(1);
-      }
-    
-      const handlePreviousPage = () => {
-        if (rolesPaginationQuery.data?.data.hasPreviousPage) {
-          setPage(page - 1)
-        }
-      }
-    
-      const handleNextPage = () => {
-        if (rolesPaginationQuery.data?.data.hasNextPage) {
-          setPage(page + 1)
-        }
-      }
+  const pageSizeOptions = [5, 10, 20];
+
+  // console.log(countriesPaginationQuery.data);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchField(e.target.value)
+  }
+
+  const handleClickSearch = () => {
+    setPage(1);
+    setSearchTerm(searchField);
+    refreshRoles();
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleClickSearch();
+    }
+  }
+
+  const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPageSize(Number(e.target.value));
+    setPage(1);
+  }
+
+  const handlePreviousPage = () => {
+    if (rolesPaginationQuery.data?.data.hasPreviousPage) {
+      setPage(page - 1)
+    }
+  }
+
+  const handleNextPage = () => {
+    if (rolesPaginationQuery.data?.data.hasNextPage) {
+      setPage(page + 1)
+    }
+  }
 
   return (
     <div className="w-full flex flex-col">
       <Title text="Roles" />
 
-      {/* Search and options }
+      {/* Search and options */}
       <div className="w-full flex flex-col md:flex-row gap-2">
         <input
           value={searchField}
@@ -95,14 +96,14 @@ const { rolesPaginationQuery,
         </Link>
       </div>
 
-      {/* Table }
+      {/* Table */}
       <div className="rounded-md mt-4 overflow-hidden">
         <table className="w-full">
           <thead className="bg-blue-500 text-white">
             <tr>
-              {/* <th className="p-2 text-left">ID</th> }
-              <th className="p-2 text-left">País</th>
-              <th className="p-2 text-left">Código alfa 3</th>
+              {/* <th className="p-2 text-left">ID</th> */}
+              <th className="p-2 text-left">Nombre</th>
+              <th className="p-2 text-left">Descripción</th>
               <th className="p-2 text-left">Opciones</th>
             </tr>
           </thead>
@@ -110,7 +111,7 @@ const { rolesPaginationQuery,
             {rolesPaginationQuery.data &&
               rolesPaginationQuery.data.data.items.map(role => (
                 <tr key={role.id} className="hover:bg-gray-200">
-                  {/* <td className="p-2">{country.id}</td> }
+                  {/* <td className="p-2">{country.id}</td> */}
                   <td className="p-2">{role.name}</td>
                   <td className="p-2">{role.description}</td>
                   <td className="p-2">
@@ -128,7 +129,7 @@ const { rolesPaginationQuery,
 
           </tbody>
         </table>
-        {/* Pagination }
+        {/* Pagination */}
         <div className="flex flex-row items-center justify-between bg-blue-500">
           <span className="p-2 text-white">Registros {rolesPaginationQuery.data?.data.totalItems}</span>
           <div className="flex flex-row items-center gap-2">
@@ -159,5 +160,4 @@ const { rolesPaginationQuery,
 
     </div>
   )
-}*/
-    
+}

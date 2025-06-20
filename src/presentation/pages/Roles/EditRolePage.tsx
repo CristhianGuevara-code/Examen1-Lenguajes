@@ -1,51 +1,50 @@
-/*import { Link, useParams } from "react-router"
-import { useCountries } from "../../hooks/useCountries";
+import { Link, useParams } from "react-router"
 import { FormikProvider, useFormik } from "formik";
-import { countryInitialValues, countryValidationSchema } from "../../../infrastructure/validations/country.validation";
 import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { Title } from "../../componentes/shared/Title";
+import { useRoles } from "../../hooks/useRoles";
+import { roleInitialValues, roleValidationSchema } from "../../../infrastructure/validations/role.validation";
 
-export const EditCountryPage = () => {
+export const EditRolePage = () => {
 
-    const { countryId } = useParams();
+    const { roleId } = useParams();
 
-    // console.log(countryId);
 
-    const { oneCountryQuery, editCountryMutation } = useCountries(countryId);
+    const { oneRoleQuery, editRoleMutation } = useRoles(roleId);
 
     const formik = useFormik({
-        initialValues: countryInitialValues,
-        validationSchema: countryValidationSchema,
+        initialValues: roleInitialValues,
+        validationSchema: roleValidationSchema,
         validateOnChange: true,
         validateOnBlur: true,
         onSubmit: async (formValues) => {
-            editCountryMutation.mutate(formValues);            
+            editRoleMutation.mutate(formValues);            
         }
     });
 
     useEffect(() => {
-        if (oneCountryQuery.isFetched && oneCountryQuery.data?.data) {
-            const { name, alphaCode3 } = oneCountryQuery.data.data;
+        if (oneRoleQuery.isFetched && oneRoleQuery.data?.data) {
+            const { name, description } = oneRoleQuery.data.data;
 
             formik.setValues({
                 name: name,
-                alphaCode3: alphaCode3
+                description: description
             });
         }
-    }, [oneCountryQuery.isFetched, oneCountryQuery.data]);
+    }, [oneRoleQuery.isFetched, oneRoleQuery.data]);
 
-    if (oneCountryQuery.isLoading) {
+    if (oneRoleQuery.isLoading) {
         return <Loader />
     }
 
     return (
         <div className="w-full flex flex-col">
-            <Title text="Editar País" />
+            <Title text="Editar Rol" />
 
-            {editCountryMutation.isError && (
+            {editRoleMutation.isError && (
                 <div className="bg-red-200 border border-red-400 text-red-700 px-4 py-3 rounded">
-                    <span>{editCountryMutation.error.message}</span>
+                    <span>{editRoleMutation.error.message}</span>
                 </div>
             )}
 
@@ -71,20 +70,20 @@ export const EditCountryPage = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="alphaCode3" className="block text-gray-700 text-sm font-bold mb-2">
-                            Código Alfa 3
+                        <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">
+                            Descripción
                         </label>
                         <input
                             type="text"
-                            id="alphaCode3"
-                            name="alphaCode3"
+                            id="description"
+                            name="description"
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-blue-500 leading-tight focus:outline-none"
-                            value={formik.values.alphaCode3}
+                            value={formik.values.description}
                             onChange={formik.handleChange}
                         />
-                        {formik.touched.alphaCode3 && formik.errors.alphaCode3 && (
+                        {formik.touched.description && formik.errors.description && (
                             <div className="text-red-500 text-xs mt-1">
-                                {formik.errors.alphaCode3}
+                                {formik.errors.description}
                             </div>
                         )}
                     </div>
@@ -98,7 +97,7 @@ export const EditCountryPage = () => {
                         </button>
 
                         <Link
-                            to="/countries"
+                            to="/roles"
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
                         >
                             Regresar
@@ -110,4 +109,4 @@ export const EditCountryPage = () => {
 
         </div>
     )
-}*/
+}

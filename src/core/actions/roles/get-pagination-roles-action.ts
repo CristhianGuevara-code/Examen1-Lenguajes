@@ -1,4 +1,4 @@
-/*import { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { ApiErrorResponse} from "../../../infrastructure/interfaces/api-error.response";
 import { personsApi } from "../../api/persons.api"
 import { ApiResponse } from "../../../infrastructure/interfaces/api.response";
@@ -31,4 +31,4 @@ export const getPaginationRolesAction = async (page = 1, pageSize = 10, searchTe
             throw new Error("Error desconocido");
         }
     }
-}*/
+}
